@@ -27,8 +27,13 @@ async function getBetaRequests() {
       userType: data.userType ?? "",
       status: data.status ?? "new",
       createdAt: data.createdAt?.toDate?.().toLocaleString("en-US", {
-        dateStyle: "medium",
-        timeStyle: "short",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        timeZone: "America/Denver",
+        timeZoneName: "short",
       }) ?? "Pending",
     };
   });
@@ -54,7 +59,6 @@ export default async function AdminPage() {
             </a>
             <div className="admin-title-row">
               <p className="eyebrow">Admin</p>
-              <h1>Beta requests</h1>
             </div>
           </div>
           <AdminSignOutButton />

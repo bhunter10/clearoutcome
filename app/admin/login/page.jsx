@@ -16,7 +16,6 @@ export default async function AdminLoginPage() {
         </a>
         <div className="admin-title-row">
           <p className="eyebrow">Admin</p>
-          <h1>Sign in</h1>
         </div>
         <p className="admin-muted">View ClearOutcome beta user requests.</p>
         <AdminLoginForm />
