@@ -6,11 +6,13 @@ The opt-in form writes to a Firebase Firestore `betaRequests` collection through
 
 ## Firebase setup
 
-Use the Firebase project named `clearoutcome`.
+Use the Firebase project named `clearoutcome` with project ID `clearoutcome-db475`.
 
 Enable these Firebase services:
 - Firestore Database
 - Authentication with Email/Password sign-in
+
+Firestore is configured as the default Standard edition database in `us-central1`.
 
 Add these environment variables to the ClearOutcome Vercel project:
 - `FIREBASE_SERVICE_ACCOUNT`
