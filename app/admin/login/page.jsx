@@ -14,8 +14,10 @@ export default async function AdminLoginPage() {
         <a className="admin-brand" href="/">
           <img src="/clearoutcome-wordmark.png" alt="ClearOutcome" />
         </a>
-        <p className="eyebrow">Admin</p>
-        <h1>Sign in</h1>
+        <div className="admin-title-row">
+          <p className="eyebrow">Admin</p>
+          <h1>Sign in</h1>
+        </div>
         <p className="admin-muted">View ClearOutcome beta user requests.</p>
         <AdminLoginForm />
       </section>

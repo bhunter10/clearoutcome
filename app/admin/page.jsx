@@ -52,8 +52,10 @@ export default async function AdminPage() {
             <a className="admin-brand" href="/">
               <img src="/clearoutcome-wordmark.png" alt="ClearOutcome" />
             </a>
-            <p className="eyebrow">Admin</p>
-            <h1>Beta requests</h1>
+            <div className="admin-title-row">
+              <p className="eyebrow">Admin</p>
+              <h1>Beta requests</h1>
+            </div>
           </div>
           <AdminSignOutButton />
         </header>

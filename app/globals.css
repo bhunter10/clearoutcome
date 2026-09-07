@@ -417,6 +417,17 @@ address a {
   margin-bottom: 24px;
 }
 
+.admin-title-row {
+  align-items: baseline;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+}
+
+.admin-title-row .eyebrow {
+  margin: 0;
+}
+
 .admin-header h1,
 .admin-login-card h1 {
   color: var(--pine-deep);
