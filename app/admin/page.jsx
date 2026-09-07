@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { AdminSignOutButton } from "../../components/AdminSignOutButton";
 import { verifyAdminSession } from "../../lib/auth/session";
 import { getAdminDb, isFirebaseAdminConfigured } from "../../lib/firebase/admin";
+import { formatPhoneNumber } from "../../lib/phone";
 
 export const dynamic = "force-dynamic";
 
@@ -23,7 +24,7 @@ async function getBetaRequests() {
       firstName: data.firstName ?? "",
       lastName: data.lastName ?? "",
       email: data.email ?? "",
-      phone: data.phone ?? "",
+      phone: formatPhoneNumber(data.phone),
       userType: data.userType ?? "",
       status: data.status ?? "new",
       createdAt: data.createdAt?.toDate?.().toLocaleString("en-US", {

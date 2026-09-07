@@ -96,7 +96,7 @@ p {
 
 h1 {
   color: var(--pine-deep);
-  font-size: clamp(1.45rem, 2.7vw, 2.55rem);
+  font-size: clamp(1.35rem, 2.45vw, 2.35rem);
   font-weight: 800;
   letter-spacing: 0;
   line-height: 1.02;

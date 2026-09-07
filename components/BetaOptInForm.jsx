@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { formatPhoneNumber } from "../lib/phone";
 
 const initialState = {
   firstName: "",
@@ -17,7 +18,10 @@ export function BetaOptInForm() {
 
   function updateField(event) {
     const { name, value } = event.target;
-    setForm((current) => ({ ...current, [name]: value }));
+    setForm((current) => ({
+      ...current,
+      [name]: name === "phone" ? formatPhoneNumber(value) : value,
+    }));
   }
 
   async function onSubmit(event) {
@@ -103,6 +107,9 @@ export function BetaOptInForm() {
             name="phone"
             type="tel"
             autoComplete="tel"
+            inputMode="tel"
+            maxLength={14}
+            placeholder="(801) 802-2222"
             value={form.phone}
             onChange={updateField}
           />

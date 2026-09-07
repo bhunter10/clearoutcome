@@ -1,6 +1,7 @@
 import { FieldValue } from "firebase-admin/firestore";
 import { NextResponse } from "next/server";
 import { getAdminDb, isFirebaseAdminConfigured } from "../../../lib/firebase/admin";
+import { formatPhoneNumber } from "../../../lib/phone";
 
 const USER_TYPES = new Set(["Lawyer or LPP", "Party", "Affiliate"]);
 
@@ -20,7 +21,7 @@ export async function POST(request) {
   const firstName = clean(body.firstName);
   const lastName = clean(body.lastName);
   const email = clean(body.email).toLowerCase();
-  const phone = clean(body.phone);
+  const phone = formatPhoneNumber(clean(body.phone));
   const userType = clean(body.userType);
 
   if (!firstName || !lastName || !email || !userType) {
