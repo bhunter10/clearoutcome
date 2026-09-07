@@ -1,0 +1,105 @@
+import { redirect } from "next/navigation";
+import { AdminSignOutButton } from "../../components/AdminSignOutButton";
+import { verifyAdminSession } from "../../lib/auth/session";
+import { getAdminDb, isFirebaseAdminConfigured } from "../../lib/firebase/admin";
+
+export const dynamic = "force-dynamic";
+
+async function getBetaRequests() {
+  if (!isFirebaseAdminConfigured()) {
+    return { configured: false, entries: [] };
+  }
+
+  const snap = await getAdminDb()
+    .collection("betaRequests")
+    .orderBy("createdAt", "desc")
+    .limit(100)
+    .get();
+
+  const entries = snap.docs.map((doc) => {
+    const data = doc.data();
+    return {
+      id: doc.id,
+      firstName: data.firstName ?? "",
+      lastName: data.lastName ?? "",
+      email: data.email ?? "",
+      phone: data.phone ?? "",
+      userType: data.userType ?? "",
+      status: data.status ?? "new",
+      createdAt: data.createdAt?.toDate?.().toLocaleString("en-US", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      }) ?? "Pending",
+    };
+  });
+
+  return { configured: true, entries };
+}
+
+export default async function AdminPage() {
+  const session = await verifyAdminSession();
+  if (!session) {
+    redirect("/admin/login");
+  }
+
+  const { configured, entries } = await getBetaRequests();
+
+  return (
+    <main className="admin-page">
+      <section className="admin-shell">
+        <header className="admin-header">
+          <div>
+            <a className="admin-brand" href="/">
+              <img src="/clearoutcome-wordmark.png" alt="ClearOutcome" />
+            </a>
+            <p className="eyebrow">Admin</p>
+            <h1>Beta requests</h1>
+          </div>
+          <AdminSignOutButton />
+        </header>
+
+        {!configured ? (
+          <div className="admin-empty">
+            Firebase is not configured yet. Add the Firebase environment variables in
+            Vercel to save and view beta requests.
+          </div>
+        ) : entries.length === 0 ? (
+          <div className="admin-empty">No beta requests yet.</div>
+        ) : (
+          <div className="admin-table-wrap">
+            <table className="admin-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>User type</th>
+                  <th>Status</th>
+                  <th>Submitted</th>
+                </tr>
+              </thead>
+              <tbody>
+                {entries.map((entry) => (
+                  <tr key={entry.id}>
+                    <td>
+                      {entry.firstName} {entry.lastName}
+                    </td>
+                    <td>
+                      <a href={`mailto:${entry.email}`}>{entry.email}</a>
+                    </td>
+                    <td>{entry.phone || "-"}</td>
+                    <td>{entry.userType}</td>
+                    <td>
+                      <span className="status-pill">{entry.status}</span>
+                    </td>
+                    <td>{entry.createdAt}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
+    </main>
+  );
+}
