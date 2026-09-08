@@ -498,16 +498,102 @@ address a {
   font-weight: 750;
 }
 
-.status-pill {
+.admin-actions-heading,
+.admin-actions-cell {
+  text-align: right;
+}
+
+.admin-delete-button {
+  background: #fff5f2;
+  border: 1px solid #efb8ad;
+  border-radius: 6px;
+  color: #8f2c1d;
+  font-size: 0.82rem;
+  font-weight: 800;
+  margin-top: 0;
+  min-height: 34px;
+  padding: 7px 10px;
+  width: auto;
+}
+
+.admin-delete-button:hover:not(:disabled) {
+  background: #fee8e2;
+  border-color: #dc8d7f;
+}
+
+.admin-status-wrap {
+  display: inline-block;
+  position: relative;
+}
+
+.admin-status-wrap::after {
+  border-bottom: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  content: "";
+  height: 6px;
+  pointer-events: none;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-65%) rotate(45deg);
+  width: 6px;
+}
+
+.admin-status-select {
+  appearance: none;
+  background: #f7faf8;
+  border: 1px solid #cbd8d2;
+  border-radius: 6px;
+  color: var(--pine-deep);
+  cursor: pointer;
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin: 0;
+  min-height: 34px;
+  padding: 7px 32px 7px 10px;
+  width: 132px;
+}
+
+.admin-status-select:hover:not(:disabled) {
+  border-color: var(--pine);
+  box-shadow: 0 3px 10px rgba(20, 82, 70, 0.08);
+}
+
+.admin-status-select:focus {
+  border-color: var(--pine);
+  box-shadow: 0 0 0 3px rgba(20, 82, 70, 0.14);
+  outline: none;
+}
+
+.admin-status-select:disabled {
+  cursor: progress;
+  opacity: 0.68;
+}
+
+.admin-status-new {
   background: #eef6f3;
-  border: 1px solid #cce0d8;
-  border-radius: 999px;
+  border-color: #cce0d8;
   color: var(--pine);
-  display: inline-flex;
-  font-size: 0.78rem;
-  font-weight: 850;
-  padding: 4px 9px;
-  text-transform: uppercase;
+}
+
+.admin-status-contacted {
+  background: #eef4fb;
+  border-color: #c6d9ed;
+  color: #235a78;
+}
+
+.admin-status-approved {
+  background: #eef8f1;
+  border-color: #c6e4cf;
+  color: #22623d;
+}
+
+.admin-status-declined {
+  background: #fff5f2;
+  border-color: #efb8ad;
+  color: #8f2c1d;
 }
 
 @media (max-width: 860px) {

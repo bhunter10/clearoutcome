@@ -22,5 +22,9 @@ Add these environment variables to the ClearOutcome Vercel project:
 - `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`
 - `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`
 - `NEXT_PUBLIC_FIREBASE_APP_ID`
+- `NEXT_PUBLIC_SITE_URL`
+- `RESEND_API_KEY`
+- `RESEND_FROM_EMAIL`
 
 The app writes beta requests server-side, so Firestore browser rules are locked down in `firestore.rules`.
+When `RESEND_API_KEY` and `RESEND_FROM_EMAIL` are configured, new beta requests also send a simple notification email to `team@clearoutcome.com`.

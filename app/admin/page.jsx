@@ -1,5 +1,7 @@
 import { redirect } from "next/navigation";
+import { AdminDeleteRequestButton } from "../../components/AdminDeleteRequestButton";
 import { AdminSignOutButton } from "../../components/AdminSignOutButton";
+import { AdminStatusSelect } from "../../components/AdminStatusSelect";
 import { verifyAdminSession } from "../../lib/auth/session";
 import { getAdminDb, isFirebaseAdminConfigured } from "../../lib/firebase/admin";
 import { formatPhoneNumber } from "../../lib/phone";
@@ -83,25 +85,36 @@ export default async function AdminPage() {
                   <th>User type</th>
                   <th>Status</th>
                   <th>Submitted</th>
+                  <th className="admin-actions-heading">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {entries.map((entry) => (
-                  <tr key={entry.id}>
-                    <td>
-                      {entry.firstName} {entry.lastName}
-                    </td>
-                    <td>
-                      <a href={`mailto:${entry.email}`}>{entry.email}</a>
-                    </td>
-                    <td>{entry.phone || "-"}</td>
-                    <td>{entry.userType}</td>
-                    <td>
-                      <span className="status-pill">{entry.status}</span>
-                    </td>
-                    <td>{entry.createdAt}</td>
-                  </tr>
-                ))}
+                {entries.map((entry) => {
+                  const requesterName = `${entry.firstName} ${entry.lastName}`.trim();
+
+                  return (
+                    <tr key={entry.id}>
+                      <td>
+                        {entry.firstName} {entry.lastName}
+                      </td>
+                      <td>
+                        <a href={`mailto:${entry.email}`}>{entry.email}</a>
+                      </td>
+                      <td>{entry.phone || "-"}</td>
+                      <td>{entry.userType}</td>
+                      <td>
+                        <AdminStatusSelect requestId={entry.id} status={entry.status} />
+                      </td>
+                      <td>{entry.createdAt}</td>
+                      <td className="admin-actions-cell">
+                        <AdminDeleteRequestButton
+                          requestId={entry.id}
+                          requesterName={requesterName}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

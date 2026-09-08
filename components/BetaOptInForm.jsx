@@ -109,7 +109,7 @@ export function BetaOptInForm() {
             autoComplete="tel"
             inputMode="tel"
             maxLength={14}
-            placeholder="(801) 802-2222"
+            placeholder="(555) 123-4567"
             value={form.phone}
             onChange={updateField}
           />
